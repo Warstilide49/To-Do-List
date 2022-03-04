@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@400;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+body{
+	background: white;
+	margin: 0;
+	font-size: 2.7vh;
+	height: 100vh;
+}
+
+button{
+	align-self: flex-start;
+}
+
+#header{
+	background: #1C658C;
+	user-select: none;
+	font-family: 'Dosis', sans-serif;
+	font-size: 8vh;
+	color: white;
+	padding: 4vh; 		/*23px->4vh*/
+	display: flex;
+	justify-content: center;
+	font-weight: 700;
+}
+
+#container{
+	display: flex;
+	min-height: 76.5vh;
+	font-family: 'Source Sans Pro', sans-serif;
+	gap: 10vh;
+}
+
+#sidebar{
+	display: flex;
+	flex-direction: column;
+	padding: 4vh 2vh; 
+	flex-basis: 15%;
+	background-color: #eee;
+}
+
+#project_container_header{
+	font-weight: 700;
+	font-size: 4.3vh;
+}
+
+#task_container_header{
+	display: flex;
+	justify-content: center;
+	margin: 3vh 2vh; 
+	font-weight: 700;
+	font-size: 4.3vh;
+	text-decoration: underline;
+}
+
+#project_container{
+	margin: 3.7vh 0;	
+	display: flex;
+	flex-direction: column;
+	gap: 0.3vh;
+}
+
+.project{
+	font-size: 2.7vh;
+	user-select: none;
+	margin: 0 1vh;
+	padding: 0.8vh 1.4vh;
+	border: 0;
+	border-radius: 1vh;
+	display: flex;
+	flex: 1;
+	justify-content: space-between;
+}
+
+.project:hover{
+	background: #d1cab8;
+}
+
+.project_name{
+	text-align: left;
+}
+
+.cancelButton{;
+	user-select: none;
+	font-weight: 700;
+	opacity: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#mainDisplay{
+	display: flex;
+	flex-direction: column;
+	gap: 3vh;
+	padding: 1vh 1vh;
+	flex-basis: 85%;
+}
+
+#task_container{
+	display: flex;
+	flex-direction: column;
+	gap: 2vh;
+}
+
+.task{
+	display: flex;
+	flex-direction: column;
+	gap: 1%;
+	border-radius: 2vh;
+	padding: 1vh 1vh;
+	border: 0.5vh solid #1C658C;
+}
+
+.task:hover{
+	background: #d1cab8;
+}
+
+.checker_button{
+	border-radius: 100%;
+	border: 0.2vh solid black;
+	height: 2.5vh;
+	display: block;
+	width: 2.5vh;
+	flex-grow: 0;
+	flex-shrink: 0;
+	font-size: 1.8vh;
+	cursor: pointer;
+	align-self: flex-end;
+}
+
+p{
+	margin: 0;
+}
+
+.button_and_name{
+	display: flex;
+	gap: 2vh;
+}
+
+.task_first_part{
+	display: flex;
+	justify-content: space-between;
+}
+
+.task_name{
+	font-weight: 700;
+	font-size: 3.1vh;
+}
+
+.deadline_and_delete{
+	display: flex;
+	gap: 2vh;
+}
+
+.delete_task{
+	cursor: pointer;
+}
+
+.edit_task{
+	cursor: pointer;	
+}
+
+.task_description{
+	margin-left: 4.7vh;
+	color: #333;
+}
+
+#footer{
+	background-color:#1C658C;
+	color: white;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+	display: flex;
+	justify-content: center;
+	padding: 1vh 0;
+}
+
+/* Modal */
+
+.modal_bg{
+	width:100%;
+	height:100%;
+	background-color :rgba(0,0,0,0.6);
+	position:absolute;
+	top:0;
+	display:flex;
+	justify-content:center;
+	align-items:center; 
+}
+
+.modal{
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 3.5vh;
+	background-color:white;
+	border-radius: 2vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 1vh 0.4vw;
+	gap: 2vh;
+}
+
+.modal_submit:hover{
+	background-color: #65C18C;
+	color: white;
+}
+
+.modal_cancel:hover{
+	background-color: #FC4F4F;
+	color: white;
+}
+
+.modal button{
+	border: 1px solid black;
+	border-radius: 2px;
+	padding: 4px;
+	font-size: 60%;
+} 
+
+input{
+	width: 70%;
+}

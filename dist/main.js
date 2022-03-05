@@ -237,16 +237,10 @@ function removeTaskObject(projectTitle, taskTitle){
 	}
 }
 
-function editTaskObject(projectTitle, oldTitle, newTitle, newDescription, newDeadline){
-	let project=getProjectUsingTitle(projectTitle);
-	for(let i=0; i<project.tasks.length; i++){
-		if (project.tasks[i].title==oldTitle){
-			project.tasks[i].title=newTitle;
-			project.tasks[i].description=newDescription;
-			project.tasks[i].deadline=newDeadline;
-			return
-		}
-	}
+function editTaskObject(task, newTitle, newDescription, newDeadline){
+	task.title=newTitle;
+	task.description=newDescription;
+	task.deadline=newDeadline;
 }
 
 function getTaskFromTitle(projectTitle, taskTitle){
@@ -379,6 +373,10 @@ function addTask(e){
 		let description=modal.querySelector("#description").value;
 
 		let unformmatedDate=modal.querySelector("#deadline").value;
+		if (!unformmatedDate){
+			alert("Please provide a valid deadline")
+			return;
+		}
 		let deadline=(0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(unformmatedDate),"dd/MM/yyyy");
 
 		for (let i=0; i<currentProject.tasks.length; i+=1){
@@ -464,9 +462,11 @@ function editTask(e){
 	let body=document.body;
 	body.appendChild(container);
 
+	let task= _app_layer_js__WEBPACK_IMPORTED_MODULE_1__.getTaskFromTitle(currentProjectTitle, originalTitle);
+
 	modal.innerHTML=`<p><strong>Edit Task</strong></p>
-					<input type="text" id="title" placeholder="Title ">
-					<input type="text" id="description" placeholder="Description">
+					<input type="text" id="title" placeholder="Title" value=${task.title}>
+					<input type="text" id="description" placeholder="Description" value=${task.description}>
 					<input type="date" id="deadline" placeholder="Deadline" min=${today}>
 					<div>
 						<button class="modal_submit">Edit</button>
@@ -484,6 +484,11 @@ function editTask(e){
 		let description=modal.querySelector("#description").value;
 
 		let unformmatedDate=modal.querySelector("#deadline").value;
+		if (!unformmatedDate){
+			alert("Please provide a valid deadline")
+			return;
+		}
+
 		let deadline=(0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(unformmatedDate),"dd/MM/yyyy");
 
 		for (let i=0; i<currentProject.tasks.length; i+=1){
@@ -499,7 +504,7 @@ function editTask(e){
 		e.target.parentNode.parentNode.parentNode.children[1].textContent=description
 		e.target.parentNode.children[0].textContent=deadline
 
-		let task= _app_layer_js__WEBPACK_IMPORTED_MODULE_1__.editTaskObject(currentProjectTitle, originalTitle, title, description, deadline);
+		_app_layer_js__WEBPACK_IMPORTED_MODULE_1__.editTaskObject(task, title, description, deadline);
 		localStorage.setItem("projects",JSON.stringify(_app_layer_js__WEBPACK_IMPORTED_MODULE_1__.projects));
 
 		container.remove()
@@ -557,6 +562,8 @@ function changeState(e){
 		e.target.textContent="✔️";
 		task.state=1;
 	}
+
+	localStorage.setItem("projects",JSON.stringify(_app_layer_js__WEBPACK_IMPORTED_MODULE_1__.projects));
 }
 
 function confirmationModal(){

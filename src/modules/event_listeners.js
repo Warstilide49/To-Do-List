@@ -84,6 +84,10 @@ export function addTask(e){
 		let description=modal.querySelector("#description").value;
 
 		let unformmatedDate=modal.querySelector("#deadline").value;
+		if (!unformmatedDate){
+			alert("Please provide a valid deadline")
+			return;
+		}
 		let deadline=format(parseISO(unformmatedDate),"dd/MM/yyyy");
 
 		for (let i=0; i<currentProject.tasks.length; i+=1){
@@ -169,9 +173,11 @@ export function editTask(e){
 	let body=document.body;
 	body.appendChild(container);
 
+	let task= app_layer.getTaskFromTitle(currentProjectTitle, originalTitle);
+
 	modal.innerHTML=`<p><strong>Edit Task</strong></p>
-					<input type="text" id="title" placeholder="Title ">
-					<input type="text" id="description" placeholder="Description">
+					<input type="text" id="title" placeholder="Title" value=${task.title}>
+					<input type="text" id="description" placeholder="Description" value=${task.description}>
 					<input type="date" id="deadline" placeholder="Deadline" min=${today}>
 					<div>
 						<button class="modal_submit">Edit</button>
@@ -189,6 +195,11 @@ export function editTask(e){
 		let description=modal.querySelector("#description").value;
 
 		let unformmatedDate=modal.querySelector("#deadline").value;
+		if (!unformmatedDate){
+			alert("Please provide a valid deadline")
+			return;
+		}
+
 		let deadline=format(parseISO(unformmatedDate),"dd/MM/yyyy");
 
 		for (let i=0; i<currentProject.tasks.length; i+=1){
@@ -204,7 +215,7 @@ export function editTask(e){
 		e.target.parentNode.parentNode.parentNode.children[1].textContent=description
 		e.target.parentNode.children[0].textContent=deadline
 
-		let task= app_layer.editTaskObject(currentProjectTitle, originalTitle, title, description, deadline);
+		app_layer.editTaskObject(task, title, description, deadline);
 		localStorage.setItem("projects",JSON.stringify(app_layer.projects));
 
 		container.remove()
@@ -262,6 +273,8 @@ export function changeState(e){
 		e.target.textContent="✔️";
 		task.state=1;
 	}
+
+	localStorage.setItem("projects",JSON.stringify(app_layer.projects));
 }
 
 function confirmationModal(){

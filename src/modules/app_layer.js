@@ -36,16 +36,10 @@ export function removeTaskObject(projectTitle, taskTitle){
 	}
 }
 
-export function editTaskObject(projectTitle, oldTitle, newTitle, newDescription, newDeadline){
-	let project=getProjectUsingTitle(projectTitle);
-	for(let i=0; i<project.tasks.length; i++){
-		if (project.tasks[i].title==oldTitle){
-			project.tasks[i].title=newTitle;
-			project.tasks[i].description=newDescription;
-			project.tasks[i].deadline=newDeadline;
-			return
-		}
-	}
+export function editTaskObject(task, newTitle, newDescription, newDeadline){
+	task.title=newTitle;
+	task.description=newDescription;
+	task.deadline=newDeadline;
 }
 
 export function getTaskFromTitle(projectTitle, taskTitle){
